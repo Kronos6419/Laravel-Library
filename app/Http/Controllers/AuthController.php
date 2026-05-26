@@ -45,11 +45,19 @@ class AuthController extends Controller
 
         //Try to log in User
         if(Auth::attempt($fields, $request->remember)){
-            return redirect()->route('home');
+            return redirect()->intended('dashboard');
         } else{
             return back()->withErrors([
                 'failed'=>'wrong password or email'
             ]);
         }
+    }
+
+    //Logout Function
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }
