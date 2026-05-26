@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    //
+    // Register
     public function register(Request $request){
         //die, dump - debug method, Kills the process to Test and sends OK
         // dd('ok');
@@ -33,5 +33,23 @@ class AuthController extends Controller
 
         //Redirect
         return redirect()->route('home');
+    }
+
+    //Login
+    public function login(Request $request){
+        //Validate
+        $fields = $request->validate([
+            'email' => ['required', 'max:225', 'email'],
+            'password' => ['required'],
+        ]);
+
+        //Try to log in User
+        if(Auth::attempt($fields, $request->remember)){
+            return redirect()->route('home');
+        } else{
+            return back()->withErrors([
+                'failed'=>'wrong password or email'
+            ]);
+        }
     }
 }
