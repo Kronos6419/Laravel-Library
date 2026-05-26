@@ -11,7 +11,7 @@
             {{-- Username --}}
             <div class="mb-4">
                 <label for="username">Username</label>
-                <input type="text" name="username" class="input @error('username') ring-red-500 @enderror">
+                <input type="text" name="username" value="{{old('username')}}" class="input @error('username') ring-red-500 @enderror">
 
                 @error('username')
                     <p class="error">{{$message}}</p>
@@ -21,7 +21,7 @@
             {{-- Email --}}
             <div class="mb-4">
                 <label for="email">Email</label>
-                <input type="email" name="email" class="input @error('email') ring-red-500 @enderror">
+                <input type="email" name="email" value="{{old('email')}}" class="input @error('email') ring-red-500 @enderror">
                 
                 @error('email')
                     <p class="error">{{$message}}</p>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -15,16 +17,21 @@ class AuthController extends Controller
         // dd($request); 
 
         //Validate
-        $request->validate([
+        $fields = $request->validate([
             'username' => ['required', 'max:225'],
-            'email' => ['required', 'max:225', 'email'],
+            'email' => ['required', 'max:225', 'email', 'unique:users'],
             'password' => ['required', 'min:3', 'confirmed'],
         ]);
 
-        dd('ok');
-        //Register
-        //Login
-        //Redirect
+        // dd($fields);
 
+        //Register
+        $user = User::create($fields);
+
+        //Login
+        Auth::login($user);
+
+        //Redirect
+        return redirect()->route('home');
     }
 }
