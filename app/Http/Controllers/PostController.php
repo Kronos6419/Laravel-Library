@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\post;
-use App\Http\Requests\StorepostRequest;
-use App\Http\Requests\UpdatepostRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -28,9 +28,18 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepostRequest $request)
+    public function store(Request $request)
     {
-        //
+        //validate
+        $fields = $request->validate([
+            'title' => ['required', 'max:255'],
+            'body' => ['required'],
+        ]);
+
+        //save the post for the logged in user
+        Auth::user()->posts()->create($fields);
+
+        return back()->with('success', "Your post was created");
     }
 
     /**
@@ -52,7 +61,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepostRequest $request, post $post)
+    public function update(Request $request, post $post)
     {
         //
     }
