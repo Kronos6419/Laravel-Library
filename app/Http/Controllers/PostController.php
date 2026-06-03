@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = post::latest()->paginate(6);
+        $posts = Post::latest()->paginate(6);
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -45,7 +45,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(post $post)
+    public function show(Post $post)
     {
         //
     }
@@ -53,7 +53,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(post $post)
+    public function edit(Post $post)
     {
         //
     }
@@ -61,7 +61,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, post $post)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -69,7 +69,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(post $post)
+    public function destroy(Post $post)
     {
         //
     }

@@ -37,4 +37,17 @@
             <button class="btn">Create</button>
         </form>
     </div>
+
+    {{-- user posts --}}
+    <h2 class="font-bold mb-4">Your Latest Posts</h2>
+
+    <div class="grid grid-cols-2 gap-6">
+        @foreach ($posts as $post)
+            <x-postCard :post="$post" />
+        @endforeach
+    </div>
+
+    <div>
+        {{ $posts->links() }}
+    </div>
 </x-layout>
