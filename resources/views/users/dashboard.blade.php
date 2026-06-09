@@ -44,6 +44,9 @@
     <div class="grid grid-cols-2 gap-6">
         @foreach ($posts as $post)
             <x-postCard :post="$post">
+                {{-- update --}}
+                <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
+
                 {{-- delete --}}
                 <form action="{{ route('posts.destroy', $post) }}" method="post">
                     @csrf
