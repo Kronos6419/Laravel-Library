@@ -5,7 +5,7 @@
     <h2 class="font-bold text-xl">{{ $book->title }}</h2>
 
     {{-- cover --}}
-    <div class="h-52 rounded-md mb-4 w-full object-cover overflow-hidden">
+    <div class="book-cover">
         @if ($book->cover_image)
             <img src="{{ asset('storage/' . $book->cover_image) }}" alt="">
         @else
@@ -15,7 +15,8 @@
 
     {{-- author and genre --}}
     <div class="text-xs">
-        <span>By {{ $book->author }} &middot; {{ $book->genre }}</span>
+        <span class="book-author">By {{ $book->author }}</span>
+        <span class="genre-badge">{{ $book->genre }}</span>
     </div>
 
     {{-- added by and date --}}

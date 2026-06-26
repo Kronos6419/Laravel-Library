@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+label {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: $muted;
+    margin-bottom: 0.15rem;
+}
+
+.input {
+    display: block;
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    margin-top: 0.25rem;
+    border-radius: $radius;
+    border: 1px solid $line;
+    background-color: $white;
+    color: $ink;
+    outline: 0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+        border-color: $navy;
+        box-shadow: 0 0 0 2px rgba(31, 45, 74, 0.15);
+    }
+}
+
+textarea.input {
+    resize: vertical;
+}
+
+.error {
+    font-size: 0.75rem;
+    color: $oxblood;
+    margin-top: 2px;
+}

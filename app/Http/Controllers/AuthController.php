@@ -37,18 +37,26 @@ class AuthController extends Controller
 
     //Login
     public function login(Request $request){
-        //Validate
+        //Validate - accept either a username or an email in the same field
         $fields = $request->validate([
-            'email' => ['required', 'max:225', 'email'],
+            'login' => ['required', 'max:225'],
             'password' => ['required'],
         ]);
 
+        //Decide which column to match on
+        $type = filter_var($fields['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $credentials = [
+            $type => $fields['login'],
+            'password' => $fields['password'],
+        ];
+
         //Try to log in User
-        if(Auth::attempt($fields, $request->remember)){
+        if(Auth::attempt($credentials, $request->remember)){
             return redirect()->intended('dashboard');
-        } else{
+        } else {
             return back()->withErrors([
-                'failed'=>'wrong password or email'
+                'failed' => 'wrong credentials'
             ]);
         }
     }

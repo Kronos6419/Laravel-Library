@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+body {
+    background-color: $parchment;
+    color: $ink;
+    font-family: $font-sans;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: $font-serif;
+    color: $navy;
+    line-height: 1.25;
+}
+
+a {
+    color: $gold-dark;
+    transition: color 0.2s ease;
+}
+
+.title {
+    font-family: $font-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $navy;
+    margin-bottom: 1.5rem;
+}

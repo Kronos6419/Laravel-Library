@@ -8,12 +8,12 @@
 
             @csrf
 
-            {{-- Email --}}
+            {{-- Username or Email --}}
             <div class="mb-4">
-                <label for="email">Email</label>
-                <input type="email" name="email" value="{{old('email')}}" class="input @error('email') ring-red-500 @enderror">
+                <label for="login">Username or Email</label>
+                <input type="text" name="login" value="{{old('login')}}" class="input @error('login') ring-red-500 @enderror">
                 
-                @error('email')
+                @error('login')
                     <p class="error">{{$message}}</p>
                 @enderror
             </div>

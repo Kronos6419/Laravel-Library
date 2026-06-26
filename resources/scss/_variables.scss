@@ -1,0 +1,27 @@
+// ===== Palette =====
+$parchment:      #f4ecd8; // warm cream page background
+$parchment-dark: #e8dcc0; // slightly deeper cream
+$white:          #fffdf8; // off-white card surface
+
+$navy:      #1f2d4a; // primary structural colour
+$navy-dark: #16213c; // hover/pressed navy
+
+$gold:      #c8a24a; // warm accent (links, highlights)
+$gold-dark: #a8842f; // accent hover / readable link text
+
+$oxblood:      #8c2f2f; // muted red for errors and destructive actions
+$oxblood-dark: #6f2424;
+
+$ink:   #2b2620; // warm near-black body text
+$muted: #6b6353; // muted brown-grey secondary text
+$line:  #d8cdb4; // hairline borders
+
+// ===== Type =====
+$font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+$font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+
+// ===== Geometry =====
+$radius:    8px;
+$radius-lg: 12px;
+$shadow:    0 4px 14px rgba(43, 38, 32, 0.08);
+$shadow-lg: 0 10px 30px rgba(43, 38, 32, 0.14);

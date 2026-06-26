@@ -1,0 +1,9 @@
+@use 'variables' as *;
+
+.card {
+    background-color: $white;
+    padding: 1.5rem;
+    border-radius: $radius-lg;
+    box-shadow: $shadow;
+    border: 1px solid $line;
+}

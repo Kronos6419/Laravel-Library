@@ -1,0 +1,183 @@
+body {
+  background-color: #f4ecd8;
+  color: #2b2620;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  color: #1f2d4a;
+  line-height: 1.25;
+}
+
+a {
+  color: #a8842f;
+  transition: color 0.2s ease;
+}
+
+.title {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2d4a;
+  margin-bottom: 1.5rem;
+}
+
+.site-header {
+  background-color: #1f2d4a;
+  box-shadow: 0 10px 30px rgba(43, 38, 32, 0.14);
+  border-bottom: 3px solid #c8a24a;
+}
+
+nav {
+  padding: 1rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f4ecd8;
+  letter-spacing: 0.02em;
+}
+.brand:hover {
+  color: #c8a24a;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: #f4ecd8;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #c8a24a;
+}
+
+.round-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #f4ecd8;
+  border: 2px solid #c8a24a;
+}
+.round-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.username {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #d8cdb4;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f2d4a;
+  text-align: center;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background-color: #1f2d4a;
+  color: #f4ecd8;
+  font-weight: 600;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn:hover {
+  background-color: #16213c;
+}
+.btn:disabled {
+  background-color: #6b6353;
+  cursor: wait;
+}
+
+label {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #6b6353;
+  margin-bottom: 0.15rem;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  margin-top: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid #d8cdb4;
+  background-color: #fffdf8;
+  color: #2b2620;
+  outline: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input:focus {
+  border-color: #1f2d4a;
+  box-shadow: 0 0 0 2px rgba(31, 45, 74, 0.15);
+}
+
+textarea.input {
+  resize: vertical;
+}
+
+.error {
+  font-size: 0.75rem;
+  color: #8c2f2f;
+  margin-top: 2px;
+}
+
+.card {
+  background-color: #fffdf8;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(43, 38, 32, 0.08);
+  border: 1px solid #d8cdb4;
+}
+
+.book-cover {
+  height: 14rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #e8dcc0;
+}
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.book-author {
+  color: #6b6353;
+}
+
+.genre-badge {
+  display: inline-block;
+  background-color: #1f2d4a;
+  color: #f4ecd8;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 9999px;
+  margin-left: 0.35rem;
+}/*# sourceMappingURL=main.css.map */
