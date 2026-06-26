@@ -3,18 +3,27 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Book;
 use Illuminate\Database\Seeder;
-use App\Models\Post;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Admin account required by the assignment brief (admin / admin)
+        $admin = User::create([
+            'username' => 'admin',
+            'email' => 'admin@library.test',
+            'password' => bcrypt('admin'),
+            'role' => 'admin',
+        ]);
 
-        Post::factory(15)->create();
+        // A few author accounts to populate the catalogue
+        $authors = User::factory(4)->create();
+
+        // Give the admin and each author a handful of books
+        foreach ($authors->push($admin) as $user) {
+            Book::factory(rand(3, 6))->create(['user_id' => $user->id]);
+        }
     }
 }

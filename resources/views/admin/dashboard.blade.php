@@ -10,10 +10,10 @@
             Manage Users
         </a>
 
-        <a href="{{ route('admin.posts.index') }}"
+        <a href="{{ route('admin.books.index') }}"
             class="block p-5 bg-slate-600 text-white rounded-lg shadow-md border border-slate-500
             hover:bg-slate-700 hover:shadow-lg transition duration-300 font-semibold text-lg">
-            Manage Posts
+            Manage Books
         </a>
     </div>
 </x-layout>
