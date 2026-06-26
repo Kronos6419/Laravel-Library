@@ -1,3 +1,4 @@
+@props(['page' => ''])
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,10 +15,10 @@
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @vite(['resources/css/app.css', 'resources/scss/main.scss', 'resources/js/app.js'])
     </head>
-    <body>
+    <body data-page="{{ $page }}">
         <header class="site-header">
             <nav>
-                <a href="{{ route('books.index') }}" class="brand">The Reading Room</a>
+                <a href="{{ route('books.index') }}" class="brand">&#128214; The Reading Room</a>
 
                 <div class="nav-right">
                     <a href="{{ route('books.index') }}" class="nav-link">Browse</a>

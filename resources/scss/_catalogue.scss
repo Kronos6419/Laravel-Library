@@ -1,0 +1,179 @@
+@use 'variables' as *;
+
+// ── Catalogue header ────────────────────────────────────────────────────────
+.catalogue-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.catalogue-count {
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: $muted;
+    margin-left: 0.5rem;
+}
+
+// ── Search ──────────────────────────────────────────────────────────────────
+.catalogue-search-wrap {
+    flex: 0 0 280px;
+}
+
+.catalogue-search {
+    background-color: $white;
+}
+
+// ── Genre filter nav ────────────────────────────────────────────────────────
+.genre-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.genre-filter-btn {
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid $line;
+    background-color: $white;
+    color: $muted;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: $navy;
+        color: $navy;
+    }
+
+    &.active {
+        background-color: $navy;
+        border-color: $navy;
+        color: $parchment;
+    }
+}
+
+// ── Book grid ───────────────────────────────────────────────────────────────
+.catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+// ── Book card (JS-rendered) ─────────────────────────────────────────────────
+.book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &__title {
+        font-family: $font-serif;
+        font-size: 1.1rem;
+        color: $navy;
+        margin-bottom: 0.25rem;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.78rem;
+    }
+
+    &__owner {
+        color: $muted;
+
+        a { color: $gold-dark; }
+    }
+
+    &__description {
+        color: $ink;
+        flex: 1;
+
+        p { margin-bottom: 0.25rem; }
+    }
+}
+
+.read-more {
+    font-size: 0.8rem;
+    color: $gold-dark;
+    font-weight: 500;
+
+    &:hover { color: $navy; }
+}
+
+// ── States ──────────────────────────────────────────────────────────────────
+.catalogue-loading,
+.catalogue-empty,
+.catalogue-error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: $muted;
+    font-style: italic;
+}
+
+.catalogue-error { color: $oxblood; }
+
+// ── Pagination ──────────────────────────────────────────────────────────────
+.catalogue-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.pagination-info {
+    font-size: 0.85rem;
+    color: $muted;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination-btn {
+    padding: 0.4rem 1rem;
+    border-radius: $radius;
+    border: 1px solid $line;
+    background-color: $white;
+    color: $navy;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+        background-color: $navy;
+        color: $parchment;
+    }
+
+    &:disabled {
+        color: $muted;
+        cursor: not-allowed;
+    }
+}
+
+.pagination-page {
+    font-size: 0.85rem;
+    color: $ink;
+}
+
+// ── Dashboard flash ─────────────────────────────────────────────────────────
+.flash-msg {
+    padding: 0.6rem 1rem;
+    border-radius: $radius;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+
+    &--success { background-color: #d1fae5; color: #065f46; }
+    &--error   { background-color: #fee2e2; color: $oxblood; }
+}
