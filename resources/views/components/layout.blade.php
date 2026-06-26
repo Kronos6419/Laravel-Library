@@ -21,10 +21,13 @@
                         </button>
 
                         {{-- Drop Down Menu --}}
-                        <div x-show="open" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light">
+                        <div x-show="open" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light min-w-[180px]">
                             <p class="username">{{auth()->user()->username}}</p>
                             <a href="{{route('dashboard')}}" class="block hover:bg-slate-100 px-4 py-2">Dashboard</a>
                             <a href="{{ route('profile.edit') }}" class="block hover:bg-slate-100 px-4 py-2">Edit Profile</a>
+                            @if (auth()->user()->role === 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="block hover:bg-slate-100 px-4 py-2">Admin Panel</a>
+                            @endif
 
                             <form action="{{route('logout')}}" method="POST">
                                 @csrf
