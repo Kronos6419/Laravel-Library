@@ -27,7 +27,7 @@
                     @auth
                         <div class="relative grid place-items-center" x-data={open:false}>
                             <button @click="open = !open" @click.outside ='open=false' class="round-btn">
-                                <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/Death.png') }}" class="w-8 h-8 rounded-full object-cover" alt="profile picture">
+                                <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.svg') }}" class="w-8 h-8 rounded-full object-cover" alt="profile picture">
                             </button>
 
                             <div x-show="open" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light min-w-[180px]">
