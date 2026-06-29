@@ -7,19 +7,12 @@
 
 import { fetchBooks, Book } from './api/books.js';
 
-// ─── State ───────────────────────────────────────────────────────────────────
+// ─── State ────────────────────────────────────────────────────────────────────
 let currentPage   = 1;
 let currentGenre  = '';
 let currentSearch = '';
 
-// ─── DOM refs ─────────────────────────────────────────────────────────────────
-const grid        = document.getElementById('catalogue-grid');
-const pagination  = document.getElementById('catalogue-pagination');
-const searchInput = document.getElementById('catalogue-search');
-const genreNav    = document.getElementById('catalogue-genres');
-const countLabel  = document.getElementById('catalogue-count');
-
-// ─── Render helpers ──────────────────────────────────────────────────────────
+// ─── Render helpers ───────────────────────────────────────────────────────────
 
 /**
  * Build a single book card element from API data.
@@ -74,10 +67,9 @@ function truncate(str, maxLen) {
 
 /**
  * Build genre filter buttons from Book.GENRES.
+ * @param {HTMLElement} genreNav
  */
-function buildGenreNav() {
-    if (!genreNav) return;
-
+function buildGenreNav(genreNav) {
     const all = document.createElement('button');
     all.className = 'genre-filter-btn active';
     all.textContent = 'All';
@@ -102,17 +94,19 @@ function buildGenreNav() {
 
         currentGenre = btn.dataset.genre;
         currentPage  = 1;
-        loadBooks();
+        loadBooks(grid, pagination, countLabel);
     });
 }
 
 /**
  * Render pagination prev/next controls.
+ * @param {HTMLElement} pagination
  * @param {Object} meta - API meta object
  * @param {Object} links - API links object
+ * @param {HTMLElement} grid
+ * @param {HTMLElement} countLabel
  */
-function renderPagination(meta, links) {
-    if (!pagination) return;
+function renderPagination(pagination, meta, links, grid, countLabel) {
     pagination.innerHTML = '';
 
     const info = document.createElement('p');
@@ -129,7 +123,7 @@ function renderPagination(meta, links) {
     prev.disabled = !links.prev;
     prev.addEventListener('click', () => {
         currentPage--;
-        loadBooks();
+        loadBooks(grid, pagination, countLabel);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
@@ -139,7 +133,7 @@ function renderPagination(meta, links) {
     next.disabled = !links.next;
     next.addEventListener('click', () => {
         currentPage++;
-        loadBooks();
+        loadBooks(grid, pagination, countLabel);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
@@ -155,11 +149,11 @@ function renderPagination(meta, links) {
 
 /**
  * Fetch books from the API using current state and re-render the grid.
+ * @param {HTMLElement} grid
+ * @param {HTMLElement} pagination
+ * @param {HTMLElement} countLabel
  */
-async function loadBooks() {
-    if (!grid) return;
-
-    // Show loading state
+async function loadBooks(grid, pagination, countLabel) {
     grid.innerHTML = '<p class="catalogue-loading">Loading books...</p>';
 
     try {
@@ -181,7 +175,7 @@ async function loadBooks() {
             countLabel.textContent = `${meta.total} book${meta.total !== 1 ? 's' : ''}`;
         }
 
-        renderPagination(meta, links);
+        renderPagination(pagination, meta, links, grid, countLabel);
 
     } catch (error) {
         grid.innerHTML = `<p class="catalogue-error">Could not load books. Please try again.</p>`;
@@ -189,11 +183,10 @@ async function loadBooks() {
     }
 }
 
-// ─── Search (debounced) ───────────────────────────────────────────────────────
+// ─── Debounce ─────────────────────────────────────────────────────────────────
 
 /**
  * Debounce a function — waits delay ms after last call before firing.
- * Prevents a fetch on every keystroke.
  * @param {Function} fn
  * @param {number} delay
  * @returns {Function}
@@ -206,14 +199,26 @@ function debounce(fn, delay) {
     };
 }
 
-if (searchInput) {
-    searchInput.addEventListener('input', debounce(e => {
-        currentSearch = e.target.value.trim();
-        currentPage   = 1;
-        loadBooks();
-    }, 350));
-}
+// ─── Boot — wait for DOM to be ready ─────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const grid       = document.getElementById('catalogue-grid');
+    const pagination = document.getElementById('catalogue-pagination');
+    const searchInput= document.getElementById('catalogue-search');
+    const genreNav   = document.getElementById('catalogue-genres');
+    const countLabel = document.getElementById('catalogue-count');
 
-// ─── Boot ─────────────────────────────────────────────────────────────────────
-buildGenreNav();
-loadBooks();
+    // Guard: only run on pages that have the catalogue grid
+    if (!grid) return;
+
+    if (genreNav) buildGenreNav(genreNav);
+
+    if (searchInput) {
+        searchInput.addEventListener('input', debounce(e => {
+            currentSearch = e.target.value.trim();
+            currentPage   = 1;
+            loadBooks(grid, pagination, countLabel);
+        }, 350));
+    }
+
+    loadBooks(grid, pagination, countLabel);
+});

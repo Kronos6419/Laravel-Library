@@ -1,11 +1,11 @@
 /**
  * dashboard.js
  * JS application for the author dashboard (users/dashboard).
- * Handles create, update, and delete via the REST API.
+ * Handles create and delete via the REST API.
  * All forms are client-side validated and sanitized before sending.
  */
 
-import { createBook, updateBook, deleteBook } from './api/books.js';
+import { createBook, deleteBook } from './api/books.js';
 import { validateBook } from './utils/validate.js';
 import { sanitizeFormData } from './utils/sanitize.js';
 
@@ -13,14 +13,11 @@ import { sanitizeFormData } from './utils/sanitize.js';
 
 /**
  * Display validation errors next to their fields.
- * Clears existing errors first.
  * @param {HTMLFormElement} form
- * @param {Object} errors - { fieldName: 'message' }
+ * @param {Object} errors
  */
 function showErrors(form, errors) {
-    // Clear previous errors
     form.querySelectorAll('.js-error').forEach(el => el.remove());
-
     Object.entries(errors).forEach(([field, message]) => {
         const input = form.querySelector(`[name="${field}"]`);
         if (!input) return;
@@ -52,12 +49,11 @@ function showFlash(message, type = 'success') {
     p.className = `flash-msg flash-msg--${type}`;
     p.textContent = message;
     area.appendChild(p);
-    // Auto-dismiss after 4 seconds
     setTimeout(() => p.remove(), 4000);
 }
 
 /**
- * Read field values from a form into a plain object.
+ * Read text field values from a form into a plain object.
  * @param {HTMLFormElement} form
  * @returns {Object}
  */
@@ -70,84 +66,79 @@ function getFields(form) {
     };
 }
 
-// ─── Create book ──────────────────────────────────────────────────────────────
+// ─── Boot — wait for DOM to be ready ─────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
 
-const createForm = document.getElementById('create-book-form');
+    // ── Create book ───────────────────────────────────────────────────────────
+    const createForm = document.getElementById('create-book-form');
 
-if (createForm) {
-    createForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        clearErrors(createForm);
+    if (createForm) {
+        createForm.addEventListener('submit', async e => {
+            e.preventDefault();
+            clearErrors(createForm);
 
-        // 1. Client-side validation
-        const fields = getFields(createForm);
-        const errors = validateBook(fields);
+            // 1. Client-side validation
+            const fields = getFields(createForm);
+            const errors = validateBook(fields);
 
-        if (Object.keys(errors).length > 0) {
-            showErrors(createForm, errors);
-            return;
-        }
-
-        // 2. Sanitize then build FormData
-        const raw = new FormData(createForm);
-        const formData = sanitizeFormData(raw);
-
-        // 3. Submit to API
-        const btn = createForm.querySelector('button[type="submit"]');
-        btn.disabled = true;
-
-        try {
-            await createBook(formData);
-            showFlash('Book added successfully!');
-            createForm.reset();
-            // Reload the page to show the new book in the list
-            setTimeout(() => window.location.reload(), 800);
-        } catch (err) {
-            // Server-side validation errors come back as { errors: { field: [...] } }
-            if (err.errors) {
-                const serverErrors = {};
-                Object.entries(err.errors).forEach(([key, msgs]) => {
-                    serverErrors[key] = msgs[0];
-                });
-                showErrors(createForm, serverErrors);
-            } else {
-                showFlash('Something went wrong. Please try again.', 'error');
+            if (Object.keys(errors).length > 0) {
+                showErrors(createForm, errors);
+                return;
             }
-        } finally {
-            btn.disabled = false;
-        }
-    });
-}
 
-// ─── Delete book ──────────────────────────────────────────────────────────────
+            // 2. Sanitize then build FormData
+            const raw = new FormData(createForm);
+            const formData = sanitizeFormData(raw);
 
-/**
- * Wire up all delete buttons on the page.
- * Uses event delegation on the book list container.
- */
-const bookList = document.getElementById('dashboard-books');
+            // 3. Submit to API
+            const btn = createForm.querySelector('button[type="submit"]');
+            btn.disabled = true;
 
-if (bookList) {
-    bookList.addEventListener('click', async e => {
-        const btn = e.target.closest('.js-delete-btn');
-        if (!btn) return;
+            try {
+                await createBook(formData);
+                showFlash('Book added successfully!');
+                createForm.reset();
+                setTimeout(() => window.location.reload(), 800);
+            } catch (err) {
+                if (err.errors) {
+                    const serverErrors = {};
+                    Object.entries(err.errors).forEach(([key, msgs]) => {
+                        serverErrors[key] = msgs[0];
+                    });
+                    showErrors(createForm, serverErrors);
+                } else {
+                    showFlash('Something went wrong. Please try again.', 'error');
+                }
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    }
 
-        const bookId = btn.dataset.bookId;
-        if (!bookId) return;
+    // ── Delete book ───────────────────────────────────────────────────────────
+    const bookList = document.getElementById('dashboard-books');
 
-        if (!confirm('Delete this book? This cannot be undone.')) return;
+    if (bookList) {
+        bookList.addEventListener('click', async e => {
+            const btn = e.target.closest('.js-delete-btn');
+            if (!btn) return;
 
-        btn.disabled = true;
+            const bookId = btn.dataset.bookId;
+            if (!bookId) return;
 
-        try {
-            await deleteBook(bookId);
-            // Remove the card from the DOM immediately
-            const card = btn.closest('.book-dashboard-card');
-            if (card) card.remove();
-            showFlash('Book deleted.');
-        } catch (err) {
-            showFlash('Could not delete book. Please try again.', 'error');
-            btn.disabled = false;
-        }
-    });
-}
+            if (!confirm('Delete this book? This cannot be undone.')) return;
+
+            btn.disabled = true;
+
+            try {
+                await deleteBook(bookId);
+                const card = btn.closest('.book-dashboard-card');
+                if (card) card.remove();
+                showFlash('Book deleted.');
+            } catch (err) {
+                showFlash('Could not delete book. Please try again.', 'error');
+                btn.disabled = false;
+            }
+        });
+    }
+});

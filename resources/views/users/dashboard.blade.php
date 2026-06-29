@@ -9,7 +9,6 @@
         <h2 class="font-bold mb-4">Add a new book</h2>
 
         <form id="create-book-form" enctype="multipart/form-data">
-            @csrf
 
             {{-- Title --}}
             <div class="mb-4">

@@ -13,8 +13,8 @@
  */
 export function stripHtml(value) {
     const div = document.createElement('div');
-    div.textContent = String(value);
-    return div.innerHTML.trim();
+    div.innerHTML = String(value);
+    return (div.innerText ?? div.textContent ?? '').trim();
 }
 
 /**

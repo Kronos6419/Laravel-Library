@@ -15,4 +15,12 @@ export default defineConfig({
             ignored: ['**/storage/framework/views/**'],
         },
     },
+    // Vitest configuration — runs unit tests without a browser
+    test: {
+        environment: 'jsdom',        // jsdom for all tests, needed by sanitize.js DOM usage
+        include: ['tests/unit/**/*.test.js'],
+        coverage: {
+            reporter: ['text'],
+        },
+    },
 });

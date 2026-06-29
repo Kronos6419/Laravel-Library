@@ -10,4 +10,11 @@ export default defineConfig({
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
     },
+    // Run unit tests and e2e tests separately
+    projects: [
+        {
+            name: 'e2e',
+            testMatch: '**/*.spec.js',
+        },
+    ],
 });

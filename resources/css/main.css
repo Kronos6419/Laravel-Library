@@ -180,4 +180,176 @@ textarea.input {
   padding: 0.1rem 0.55rem;
   border-radius: 9999px;
   margin-left: 0.35rem;
+}
+
+.catalogue-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.catalogue-count {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #6b6353;
+  margin-left: 0.5rem;
+}
+
+.catalogue-search-wrap {
+  flex: 0 0 280px;
+}
+
+.catalogue-search {
+  background-color: #fffdf8;
+}
+
+.genre-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.genre-filter-btn {
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid #d8cdb4;
+  background-color: #fffdf8;
+  color: #6b6353;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.genre-filter-btn:hover {
+  border-color: #1f2d4a;
+  color: #1f2d4a;
+}
+.genre-filter-btn.active {
+  background-color: #1f2d4a;
+  border-color: #1f2d4a;
+  color: #f4ecd8;
+}
+
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.book-card__title {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  color: #1f2d4a;
+  margin-bottom: 0.25rem;
+}
+.book-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+}
+.book-card__owner {
+  color: #6b6353;
+}
+.book-card__owner a {
+  color: #a8842f;
+}
+.book-card__description {
+  color: #2b2620;
+  flex: 1;
+}
+.book-card__description p {
+  margin-bottom: 0.25rem;
+}
+
+.read-more {
+  font-size: 0.8rem;
+  color: #a8842f;
+  font-weight: 500;
+}
+.read-more:hover {
+  color: #1f2d4a;
+}
+
+.catalogue-loading,
+.catalogue-empty,
+.catalogue-error {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6b6353;
+  font-style: italic;
+}
+
+.catalogue-error {
+  color: #8c2f2f;
+}
+
+.catalogue-pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.pagination-info {
+  font-size: 0.85rem;
+  color: #6b6353;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pagination-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #d8cdb4;
+  background-color: #fffdf8;
+  color: #1f2d4a;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pagination-btn:hover:not(:disabled) {
+  background-color: #1f2d4a;
+  color: #f4ecd8;
+}
+.pagination-btn:disabled {
+  color: #6b6353;
+  cursor: not-allowed;
+}
+
+.pagination-page {
+  font-size: 0.85rem;
+  color: #2b2620;
+}
+
+.flash-msg {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.flash-msg--success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.flash-msg--error {
+  background-color: #fee2e2;
+  color: #8c2f2f;
 }/*# sourceMappingURL=main.css.map */
