@@ -68,8 +68,11 @@ function truncate(str, maxLen) {
 /**
  * Build genre filter buttons from Book.GENRES.
  * @param {HTMLElement} genreNav
+ * @param {HTMLElement} grid
+ * @param {HTMLElement} pagination
+ * @param {HTMLElement} countLabel
  */
-function buildGenreNav(genreNav) {
+function buildGenreNav(genreNav, grid, pagination, countLabel) {
     const all = document.createElement('button');
     all.className = 'genre-filter-btn active';
     all.textContent = 'All';
@@ -210,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Guard: only run on pages that have the catalogue grid
     if (!grid) return;
 
-    if (genreNav) buildGenreNav(genreNav);
+    if (genreNav) buildGenreNav(genreNav, grid, pagination, countLabel);
 
     if (searchInput) {
         searchInput.addEventListener('input', debounce(e => {
