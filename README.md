@@ -4,6 +4,7 @@
 
 A library-themed CMS web application built with Laravel 12, featuring a RESTful JSON API consumed by a client-side JavaScript application. Authors can register, publish and manage books, guests can browse the catalogue, and admins have full control through a dedicated panel.
 
+https://github.com/Kronos6419/Laravel-Library.git
 ---
 
 ## Features
